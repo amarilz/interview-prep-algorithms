@@ -9,4 +9,8 @@ public class Array {
     public static int subarraySumFixed(int[] nums, int k) {
         return 0;
     }
+
+    public static int minSubArrayLen(int[] nums, int target) {
+        return 0;
+    }
 }

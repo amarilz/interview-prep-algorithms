@@ -124,4 +124,73 @@ class ArrayTest {
             assertEquals(expected, Array.subarraySumFixed(nums, k));
         }
     }
+
+    @Nested
+    @DisplayName("variable sliding window")
+    class VariableSlidingWindow {
+
+        @Test
+        void testExampleCase() {
+            int[] nums = {2, 3, 1, 2, 4, 3};
+            int target = 7;
+            int expected = 2; // [4,3]
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testNoSubarrayFound() {
+            int[] nums = {1, 1, 1, 1, 1};
+            int target = 11;
+            int expected = 0;
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testSingleElementEqualToTarget() {
+            int[] nums = {5, 1, 3, 5, 10, 7, 4, 9, 2, 8};
+            int target = 10;
+            int expected = 1; // [10]
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testWholeArrayNeeded() {
+            int[] nums = {1, 2, 3, 4, 5};
+            int target = 15;
+            int expected = 5;
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testMultiplePossibleSubarrays() {
+            int[] nums = {1, 4, 4};
+            int target = 4;
+            int expected = 1;
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testEmptyArray() {
+            int[] nums = {};
+            int target = 100;
+            int expected = 0;
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testSingleElementGreaterThanTarget() {
+            int[] nums = {11};
+            int target = 7;
+            int expected = 1;
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+
+        @Test
+        void testSingleElementLessThanTarget() {
+            int[] nums = {5};
+            int target = 7;
+            int expected = 0;
+            assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+    }
 }
