@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,6 +61,67 @@ class ArrayTest {
             int[] array = {-10, -5, 0, 5, 10};
             assertTrue(Array.binarySearch(array, -5));
             assertFalse(Array.binarySearch(array, -3));
+        }
+    }
+
+    @Nested
+    @DisplayName("fixed sliding window")
+    class FixedSlidingWindow {
+
+        @Test
+        void testCasoBase() {
+            int[] nums = {2, 1, 5, 1, 3, 2};
+            int k = 3;
+            int expected = 9; // subarray: [5, 1, 3]
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
+        }
+
+        @Test
+        void testArrayDiLunghezzaEsatta() {
+            int[] nums = {1, 2, 3};
+            int k = 3;
+            int expected = 6;
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
+        }
+
+        @Test
+        void testConNumeriNegativi() {
+            int[] nums = {-2, -1, 0, -3, -4};
+            int k = 2;
+            int expected = -1; // subarray: [-1, 0]
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
+        }
+
+        @Test
+        void testKMaggioreDiArray() {
+            int[] nums = {1, 2};
+            int k = 3;
+            int expected = 0; // input non valido
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
+        }
+
+        @Test
+        void testKUgualeZero() {
+            int[] nums = {1, 2, 3};
+            int k = 0;
+            int expected = 0;
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
+        }
+
+        @Test
+        void testArrayConUnElemento() {
+            int[] nums = {10};
+            int k = 1;
+            int expected = 10;
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
+        }
+
+        @Test
+        void testArrayVuoto() {
+            int[] nums = {};
+            int k = 1;
+            int expected = 0;
+            assertEquals(expected, Array.subarraySumFixed(nums, k));
         }
     }
 }
