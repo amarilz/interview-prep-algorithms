@@ -22,11 +22,13 @@ public class Array {
         return null;
     }
 
-    public static int queryPrefixSum(int[] prefix, int i, int j) {
+    public static int queryPrefixSum(int[] prefix, int left, int right) {
+        // return sum of range [left, right]
         return 0;
     }
 
     public static int[] intervalIncrement(int[][] operations, int n) {
+        // operation (start, end, value)
         return null;
     }
 }
