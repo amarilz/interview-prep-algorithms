@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -191,6 +192,67 @@ class ArrayTest {
             int target = 7;
             int expected = 0;
             assertEquals(expected, Array.minSubArrayLen(nums, target));
+        }
+    }
+
+    @Nested
+    @DisplayName("interval increment")
+    class IntervalIncrement {
+
+        @Test
+        void testNoOperations() {
+            int[][] operations = {};
+            int n = 5;
+            int[] expected = {0, 0, 0, 0, 0};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+
+        @Test
+        void testSingleOperation() {
+            int[][] operations = {{1, 3, 2}};
+            int n = 5;
+            int[] expected = {0, 2, 2, 2, 0};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+
+        @Test
+        void testMultipleNonOverlappingOperations() {
+            int[][] operations = {{0, 1, 1}, {3, 4, 2}};
+            int n = 5;
+            int[] expected = {1, 1, 0, 2, 2};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+
+        @Test
+        void testOverlappingOperations() {
+            int[][] operations = {{0, 2, 1}, {1, 3, 2}};
+            int n = 4;
+            int[] expected = {1, 3, 3, 2};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+
+        @Test
+        void testFullRangeUpdate() {
+            int[][] operations = {{0, 4, 5}};
+            int n = 5;
+            int[] expected = {5, 5, 5, 5, 5};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+
+        @Test
+        void testNegativeValues() {
+            int[][] operations = {{0, 2, -1}, {1, 3, -2}};
+            int n = 4;
+            int[] expected = {-1, -3, -3, -2};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+
+        @Test
+        void testEdgeIndices() {
+            int[][] operations = {{0, 0, 4}, {4, 4, 2}};
+            int n = 5;
+            int[] expected = {4, 0, 0, 0, 2};
+            assertArrayEquals(expected, Array.intervalIncrement(operations, n));
         }
     }
 }

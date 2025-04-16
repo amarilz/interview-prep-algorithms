@@ -17,4 +17,8 @@ public class Array {
     public static int minSubArrayLen(int[] nums, int target) {
         return 0;
     }
+
+    public static int[] intervalIncrement(int[][] operations, int n) {
+        return null;
+    }
 }
