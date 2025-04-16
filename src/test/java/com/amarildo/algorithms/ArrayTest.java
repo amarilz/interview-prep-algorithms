@@ -196,6 +196,63 @@ class ArrayTest {
     }
 
     @Nested
+    @DisplayName("prefix sum")
+    class PrefixSum {
+
+        @Test
+        void testPrefixSumAndQuery_basicCase() {
+            int[] arr = {1, 2, 3, 4, 5};
+            int[] prefix = Array.buildPrefixSum(arr);
+
+            // Verifica valori del prefix array
+            assertArrayEquals(new int[]{1, 3, 6, 10, 15}, prefix);
+
+            // Verifica query su sottoarray
+            assertEquals(6, Array.queryPrefixSum(prefix, 0, 2));  // 1+2+3
+            assertEquals(12, Array.queryPrefixSum(prefix, 2, 4)); // 3+4+5
+            assertEquals(9, Array.queryPrefixSum(prefix, 1, 3));  // 2+3+4
+            assertEquals(1, Array.queryPrefixSum(prefix, 0, 0));  // solo primo elemento
+            assertEquals(5, Array.queryPrefixSum(prefix, 4, 4));  // solo ultimo elemento
+        }
+
+        @Test
+        void testPrefixSumAndQuery_singleElement() {
+            int[] arr = {42};
+            int[] prefix = Array.buildPrefixSum(arr);
+
+            assertArrayEquals(new int[]{42}, prefix);
+            assertEquals(42, Array.queryPrefixSum(prefix, 0, 0));
+        }
+
+        @Test
+        void testPrefixSumAndQuery_allZeros() {
+            int[] arr = {0, 0, 0, 0};
+            int[] prefix = Array.buildPrefixSum(arr);
+
+            assertArrayEquals(new int[]{0, 0, 0, 0}, prefix);
+            assertEquals(0, Array.queryPrefixSum(prefix, 1, 3));
+        }
+
+        @Test
+        void testPrefixSumAndQuery_negativeNumbers() {
+            int[] arr = {-1, -2, -3, -4};
+            int[] prefix = Array.buildPrefixSum(arr);
+
+            assertArrayEquals(new int[]{-1, -3, -6, -10}, prefix);
+            assertEquals(-3, Array.queryPrefixSum(prefix, 0, 1));   // -1 + -2
+            assertEquals(-9, Array.queryPrefixSum(prefix, 1, 3));   // -2 + -3 + -4
+        }
+
+        @Test
+        void testPrefixSumAndQuery_fullArraySum() {
+            int[] arr = {10, 20, 30};
+            int[] prefix = Array.buildPrefixSum(arr);
+
+            assertEquals(60, Array.queryPrefixSum(prefix, 0, 2));  // somma completa
+        }
+    }
+
+    @Nested
     @DisplayName("interval increment")
     class IntervalIncrement {
 

@@ -18,6 +18,14 @@ public class Array {
         return 0;
     }
 
+    public static int[] buildPrefixSum(int[] arr) {
+        return null;
+    }
+
+    public static int queryPrefixSum(int[] prefix, int i, int j) {
+        return 0;
+    }
+
     public static int[] intervalIncrement(int[][] operations, int n) {
         return null;
     }
