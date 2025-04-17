@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Stack;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -310,6 +312,71 @@ class ArrayTest {
             int n = 5;
             int[] expected = {4, 0, 0, 0, 2};
             assertArrayEquals(expected, Array.intervalIncrement(operations, n));
+        }
+    }
+
+    @Nested
+    @DisplayName("monotonic stack")
+    class MonotonicStack {
+
+        @Test
+        void testEmptyArray() {
+            int[] input = {};
+            Stack<Integer> result = Array.monotonicStack(input);
+            assertTrue(result.isEmpty(), "Stack should be empty");
+        }
+
+        @Test
+        void testStrictlyIncreasingArray() {
+            int[] input = {1, 2, 3, 4, 5};
+            Stack<Integer> result = Array.monotonicStack(input);
+
+            assertEquals(5, result.size());
+            assertEquals(1, result.firstElement());
+            assertEquals(5, result.peek());
+        }
+
+        @Test
+        void testStrictlyDecreasingArray() {
+            int[] input = {5, 4, 3, 2, 1};
+            Stack<Integer> result = Array.monotonicStack(input);
+
+            assertEquals(1, result.size());
+            assertEquals(1, result.peek());
+        }
+
+        @Test
+        void testArrayWithDuplicates() {
+            int[] input = {3, 2, 2, 4, 1};
+            Stack<Integer> result = Array.monotonicStack(input);
+
+            // Si dovrebbero mantenere solo i numeri che mantengono la monotonicità crescente
+            Stack<Integer> expected = new Stack<>();
+            expected.push(1);  // Alla fine rimane solo il più piccolo
+
+            assertEquals(expected, result);
+        }
+
+        @Test
+        void testArrayMixed() {
+            int[] input = {2, 1, 3, 2, 4};
+            Stack<Integer> result = Array.monotonicStack(input);
+
+            Stack<Integer> expected = new Stack<>();
+            expected.push(1);
+            expected.push(2);
+            expected.push(4);
+
+            assertEquals(expected, result);
+        }
+
+        @Test
+        void testSingleElementArray() {
+            int[] input = {42};
+            Stack<Integer> result = Array.monotonicStack(input);
+
+            assertEquals(1, result.size());
+            assertEquals(42, result.peek());
         }
     }
 }

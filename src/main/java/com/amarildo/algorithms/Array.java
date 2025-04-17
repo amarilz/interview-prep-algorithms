@@ -3,6 +3,8 @@ package com.amarildo.algorithms;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.Stack;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Array {
 
@@ -29,6 +31,10 @@ public class Array {
 
     public static int[] intervalIncrement(int[][] operations, int n) {
         // operation (start, end, value)
+        return null;
+    }
+
+    public static Stack<Integer> monotonicStack(int[] arr) {
         return null;
     }
 }
