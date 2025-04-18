@@ -9,7 +9,11 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Tree {
 
-    public static List<Integer> inorderTraversal(TreeNode root) {
+    public static List<Integer> dfsInorderTraversal(TreeNode root) {
+        return null;
+    }
+
+    public static List<Integer> bfsTraversal(TreeNode root) {
         return null;
     }
 }
