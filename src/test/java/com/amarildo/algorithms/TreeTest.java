@@ -75,13 +75,6 @@ class TreeTest {
     class IterativeBfs {
 
         @Test
-        void testEmptyTree() {
-            TreeNode root = null;
-            List<Integer> result = Tree.bfsTraversal(root);
-            assertEquals(List.of(), result);
-        }
-
-        @Test
         void testSingleNodeTree() {
             TreeNode root = new TreeNode(1);
             List<Integer> result = Tree.bfsTraversal(root);

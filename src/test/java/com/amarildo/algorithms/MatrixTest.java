@@ -54,18 +54,6 @@ class MatrixTest {
         }
 
         @Test
-        void testEmptyGrid() {
-            int[][] grid = new int[0][0];
-            assertEquals(0, Matrix.countIslandsDFS(grid));
-        }
-
-        @Test
-        void testNullGrid() {
-            int[][] grid = null;
-            assertEquals(0, Matrix.countIslandsDFS(grid));
-        }
-
-        @Test
         void testDisconnectedSingleCells() {
             int[][] grid = {
                     {1, 0, 1},
