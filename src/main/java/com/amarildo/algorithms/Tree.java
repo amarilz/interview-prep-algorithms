@@ -16,4 +16,18 @@ public class Tree {
     public static List<Integer> bfsTraversal(TreeNode root) {
         return null;
     }
+
+    static class Trie {
+
+        public void insert(String word) {
+        }
+
+        public boolean search(String word) {
+            return false;
+        }
+
+        public boolean startsWith(String prefix) {
+            return false;
+        }
+    }
 }

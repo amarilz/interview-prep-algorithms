@@ -1,5 +1,6 @@
 package com.amarildo.algorithms;
 
+import com.amarildo.algorithms.Tree.Trie;
 import com.amarildo.structure.TreeNode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TreeTest {
@@ -115,6 +117,46 @@ class TreeTest {
 
             List<Integer> result = Tree.bfsTraversal(root);
             assertEquals(List.of(1, 2, 3, 4), result);
+        }
+    }
+
+    @Nested
+    @DisplayName("trie")
+    class TrieTest {
+
+        @Test
+        void testInsertAndSearch() {
+            Trie trie = new Trie();
+
+            trie.insert("apple");
+            assertTrue(trie.search("apple"), "La parola 'apple' dovrebbe essere trovata");
+            assertFalse(trie.search("app"), "La parola 'app' non dovrebbe essere trovata (non inserita)");
+        }
+
+        @Test
+        void testStartsWith() {
+            Trie trie = new Trie();
+
+            trie.insert("banana");
+            assertTrue(trie.startsWith("ban"), "'ban' è un prefisso valido");
+            assertTrue(trie.startsWith("bana"), "'bana' è un prefisso valido");
+            assertFalse(trie.startsWith("band"), "'band' non è un prefisso valido");
+        }
+
+        @Test
+        void testMultipleWords() {
+            Trie trie = new Trie();
+
+            trie.insert("car");
+            trie.insert("cat");
+            trie.insert("cart");
+
+            assertTrue(trie.search("car"));
+            assertTrue(trie.search("cat"));
+            assertTrue(trie.search("cart"));
+            assertFalse(trie.search("ca")); // non è una parola inserita
+            assertTrue(trie.startsWith("ca"));
+            assertFalse(trie.search("cab")); // non è stata inserita
         }
     }
 }
