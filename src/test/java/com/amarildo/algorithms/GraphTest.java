@@ -12,6 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.amarildo.algorithms.Graph.Edge;
+import static com.amarildo.algorithms.Graph.bfs;
+import static com.amarildo.algorithms.Graph.convertMatrixToAdjacencyMap;
+import static com.amarildo.algorithms.Graph.convertToAdjacencyMap;
+import static com.amarildo.algorithms.Graph.dfsIterative;
+import static com.amarildo.algorithms.Graph.dijkstra;
+import static com.amarildo.algorithms.Graph.topologicalSortDfs;
+import static com.amarildo.algorithms.Graph.topologicalSortKahn;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,7 +47,7 @@ class GraphTest {
             expected.put(2, List.of(0));
 
             // when
-            Map<Integer, List<Integer>> actual = Graph.convertToAdjacencyMap(edges);
+            Map<Integer, List<Integer>> actual = convertToAdjacencyMap(edges);
 
             // then
             assertEquals(expected, actual);
@@ -65,7 +74,7 @@ class GraphTest {
             expected.put(2, List.of(0));
 
             // when
-            Map<Integer, List<Integer>> actual = Graph.convertMatrixToAdjacencyMap(matrix);
+            Map<Integer, List<Integer>> actual = convertMatrixToAdjacencyMap(matrix);
 
             // then
             assertEquals(expected, actual);
@@ -87,7 +96,7 @@ class GraphTest {
             expected.put(2, Collections.emptyList());
 
             // when
-            Map<Integer, List<Integer>> actual = Graph.convertMatrixToAdjacencyMap(matrix);
+            Map<Integer, List<Integer>> actual = convertMatrixToAdjacencyMap(matrix);
 
             // then
             assertEquals(expected, actual);
@@ -111,7 +120,7 @@ class GraphTest {
             List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5);
 
             // when
-            List<Integer> actual = Graph.bfs(graph, 1);
+            List<Integer> actual = bfs(graph, 1);
 
             // then
             assertEquals(expected, actual);
@@ -130,7 +139,7 @@ class GraphTest {
             List<Integer> expected = Arrays.asList(1, 2);
 
             // when
-            List<Integer> actual = Graph.bfs(graph, 1);
+            List<Integer> actual = bfs(graph, 1);
 
             // then
             assertEquals(expected, actual);
@@ -165,7 +174,7 @@ class GraphTest {
             List<Integer> expected = Arrays.asList(0, 1, 3, 2);
 
             // then
-            assertEquals(expected, Graph.dfsIterative(graph, 0));
+            assertEquals(expected, dfsIterative(graph, 0));
         }
 
         @Test
@@ -180,7 +189,7 @@ class GraphTest {
             List<Integer> expected = Arrays.asList(0, 1, 2);
 
             // then
-            assertEquals(expected, Graph.dfsIterative(graph, 0));
+            assertEquals(expected, dfsIterative(graph, 0));
         }
 
         @Test
@@ -195,7 +204,7 @@ class GraphTest {
             List<Integer> expected = List.of(1);
 
             // then
-            assertEquals(expected, Graph.dfsIterative(graph, 1));
+            assertEquals(expected, dfsIterative(graph, 1));
         }
 
         @Test
@@ -211,8 +220,8 @@ class GraphTest {
             List<Integer> expectedFrom2 = Arrays.asList(2, 3);
 
             // then
-            assertEquals(expectedFrom0, Graph.dfsIterative(graph, 0));
-            assertEquals(expectedFrom2, Graph.dfsIterative(graph, 2));
+            assertEquals(expectedFrom0, dfsIterative(graph, 0));
+            assertEquals(expectedFrom2, dfsIterative(graph, 2));
         }
     }
 
@@ -259,7 +268,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> order = Graph.topologicalSortDfs(adj, V);
+                List<Integer> order = topologicalSortDfs(adj, V);
 
                 // then
                 assertEquals(V, order.size());
@@ -278,7 +287,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> order = Graph.topologicalSortDfs(adj, V);
+                List<Integer> order = topologicalSortDfs(adj, V);
 
                 // then
                 assertEquals(V, order.size());
@@ -298,7 +307,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> order = Graph.topologicalSortDfs(adj, V);
+                List<Integer> order = topologicalSortDfs(adj, V);
 
                 // then
                 assertEquals(V, order.size());
@@ -321,7 +330,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> result = Graph.topologicalSortKahn(adj, V);
+                List<Integer> result = topologicalSortKahn(adj, V);
 
                 // then
                 assertEquals(V, result.size());
@@ -340,7 +349,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> result = Graph.topologicalSortKahn(adj, V);
+                List<Integer> result = topologicalSortKahn(adj, V);
 
                 // then
                 assertEquals(V, result.size());
@@ -360,7 +369,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> result = Graph.topologicalSortKahn(adj, V);
+                List<Integer> result = topologicalSortKahn(adj, V);
 
                 // then
                 assertEquals(V, result.size());
@@ -381,8 +390,64 @@ class GraphTest {
 
                 // when
                 // then
-                assertThrows(IllegalStateException.class, () -> Graph.topologicalSortKahn(adj, V));
+                assertThrows(IllegalStateException.class, () -> topologicalSortKahn(adj, V));
             }
+        }
+    }
+
+    @Nested
+    @DisplayName("shortest path")
+    class ShortestPath {
+
+        @Test
+        void testSingleNodeGraph() {
+            Map<Integer, List<Edge>> graph = new HashMap<>();
+            int[] result = dijkstra(graph, 0, 1);
+            assertArrayEquals(new int[]{0}, result);
+        }
+
+        @Test
+        void testSimpleGraph() {
+            Map<Integer, List<Edge>> graph = new HashMap<>();
+            graph.put(0, Arrays.asList(new Edge(1, 2), new Edge(2, 4)));
+            graph.put(1, List.of(new Edge(2, 1)));
+            graph.put(2, List.of());
+
+            int[] result = dijkstra(graph, 0, 3);
+            assertArrayEquals(new int[]{0, 2, 3}, result);
+        }
+
+        @Test
+        void testDisconnectedGraph() {
+            Map<Integer, List<Edge>> graph = new HashMap<>();
+            graph.put(0, List.of(new Edge(1, 3)));
+            graph.put(1, List.of());
+            graph.put(2, List.of()); // Nodo 2 è disconnesso
+
+            int[] result = dijkstra(graph, 0, 3);
+            assertArrayEquals(new int[]{0, 3, Integer.MAX_VALUE}, result);
+        }
+
+        @Test
+        void testZeroWeightEdges() {
+            Map<Integer, List<Edge>> graph = new HashMap<>();
+            graph.put(0, Arrays.asList(new Edge(1, 0), new Edge(2, 1)));
+            graph.put(1, List.of(new Edge(2, 0)));
+            graph.put(2, List.of());
+
+            int[] result = dijkstra(graph, 0, 3);
+            assertArrayEquals(new int[]{0, 0, 0}, result);
+        }
+
+        @Test
+        void testCyclicGraph() {
+            Map<Integer, List<Edge>> graph = new HashMap<>();
+            graph.put(0, List.of(new Edge(1, 1)));
+            graph.put(1, List.of(new Edge(2, 2)));
+            graph.put(2, List.of(new Edge(0, 3))); // Ciclo
+
+            int[] result = dijkstra(graph, 0, 3);
+            assertArrayEquals(new int[]{0, 1, 3}, result);
         }
     }
 }

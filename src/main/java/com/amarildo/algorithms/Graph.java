@@ -40,4 +40,18 @@ public class Graph {
     public static List<Integer> topologicalSortKahn(List<List<Integer>> adj, int V) {
         return null;
     }
+
+    static class Edge {
+        int destination;
+        int weight;
+
+        Edge(int destination, int weight) {
+            this.destination = destination;
+            this.weight = weight;
+        }
+    }
+
+    public static int[] dijkstra(Map<Integer, List<Edge>> graph, int source, int n) {
+        return null;
+    }
 }
