@@ -11,4 +11,8 @@ public class Backtracking {
     public static List<List<Integer>> permute(int[] nums) {
         return null;
     }
+
+    public static int totalNQueens(int n) {
+        return 0;
+    }
 }
