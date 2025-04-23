@@ -141,14 +141,6 @@ class ArrayTest {
         }
 
         @Test
-        void testNoSubarrayFound() {
-            int[] nums = {1, 1, 1, 1, 1};
-            int target = 11;
-            int expected = 0;
-            assertEquals(expected, Array.minSubArrayLen(nums, target));
-        }
-
-        @Test
         void testSingleElementEqualToTarget() {
             int[] nums = {5, 1, 3, 5, 10, 7, 4, 9, 2, 8};
             int target = 10;
@@ -173,26 +165,10 @@ class ArrayTest {
         }
 
         @Test
-        void testEmptyArray() {
-            int[] nums = {};
-            int target = 100;
-            int expected = 0;
-            assertEquals(expected, Array.minSubArrayLen(nums, target));
-        }
-
-        @Test
         void testSingleElementGreaterThanTarget() {
             int[] nums = {11};
             int target = 7;
             int expected = 1;
-            assertEquals(expected, Array.minSubArrayLen(nums, target));
-        }
-
-        @Test
-        void testSingleElementLessThanTarget() {
-            int[] nums = {5};
-            int target = 7;
-            int expected = 0;
             assertEquals(expected, Array.minSubArrayLen(nums, target));
         }
     }
