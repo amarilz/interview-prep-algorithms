@@ -30,4 +30,22 @@ public class Tree {
             return false;
         }
     }
+
+    static class DisjointSet {
+
+        public DisjointSet(int n) {
+        }
+
+        int find(int x) {
+            return -1;
+        }
+
+        void union(int x, int y) {
+        }
+
+        // Controlla se x e y appartengono allo stesso insieme
+        public boolean connected(int x, int y) {
+            return false;
+        }
+    }
 }
