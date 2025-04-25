@@ -17,6 +17,10 @@ public class Tree {
         return null;
     }
 
+    public static TreeNode lowestCommonAncestor(TreeNode root, int p, int q) {
+        return null;
+    }
+
     static class Trie {
 
         public void insert(String word) {

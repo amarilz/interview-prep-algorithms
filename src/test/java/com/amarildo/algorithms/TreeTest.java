@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TreeTest {
@@ -119,6 +120,68 @@ class TreeTest {
 
             List<Integer> result = Tree.bfsTraversal(root);
             assertEquals(List.of(1, 2, 3, 4), result);
+        }
+    }
+
+    @Nested
+    @DisplayName("bst")
+    class Bst {
+
+        TreeNode root;
+
+        @BeforeEach
+        void setUp() {
+            int[] values = {6, 2, 8, 0, 4, 7, 9, 3, 5};
+            root = TreeNode.createBSTFromArray(values);
+        }
+
+        @Test
+        void testLCAOf2And8() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 2, 8);
+            assertNotNull(lca);
+            assertEquals(6, lca.val);
+        }
+
+        @Test
+        void testLCAOf2And4() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 2, 4);
+            assertNotNull(lca);
+            assertEquals(2, lca.val);
+        }
+
+        @Test
+        void testLCAOf3And5() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 3, 5);
+            assertNotNull(lca);
+            assertEquals(4, lca.val);
+        }
+
+        @Test
+        void testLCAOf0And5() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 0, 5);
+            assertNotNull(lca);
+            assertEquals(2, lca.val);
+        }
+
+        @Test
+        void testLCAOf7And9() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 7, 9);
+            assertNotNull(lca);
+            assertEquals(8, lca.val);
+        }
+
+        @Test
+        void testLCAWithSameNode() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 4, 4);
+            assertNotNull(lca);
+            assertEquals(4, lca.val);
+        }
+
+        @Test
+        void testLCAWhenOneValueIsRoot() {
+            TreeNode lca = Tree.lowestCommonAncestor(root, 6, 9);
+            assertNotNull(lca);
+            assertEquals(6, lca.val);
         }
     }
 
