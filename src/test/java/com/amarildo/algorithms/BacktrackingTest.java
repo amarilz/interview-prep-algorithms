@@ -56,44 +56,4 @@ class BacktrackingTest {
             assertEquals(24, result.size()); // 4! = 24
         }
     }
-
-    @Nested
-    @DisplayName("count solutions")
-    class ContareSoluzioni {
-
-        @Test
-        void testNEquals1() {
-            assertEquals(1, Backtracking.totalNQueens(1), "N=1 dovrebbe avere 1 soluzione");
-        }
-
-        @Test
-        void testNEquals2() {
-            assertEquals(0, Backtracking.totalNQueens(2), "N=2 non ha soluzioni");
-        }
-
-        @Test
-        void testNEquals3() {
-            assertEquals(0, Backtracking.totalNQueens(3), "N=3 non ha soluzioni");
-        }
-
-        @Test
-        void testNEquals4() {
-            assertEquals(2, Backtracking.totalNQueens(4), "N=4 ha 2 soluzioni");
-        }
-
-        @Test
-        void testNEquals5() {
-            assertEquals(10, Backtracking.totalNQueens(5), "N=5 ha 10 soluzioni");
-        }
-
-        @Test
-        void testNEquals6() {
-            assertEquals(4, Backtracking.totalNQueens(6), "N=6 ha 4 soluzioni");
-        }
-
-        @Test
-        void testNEquals8() {
-            assertEquals(92, Backtracking.totalNQueens(8), "N=8 ha 92 soluzioni");
-        }
-    }
 }

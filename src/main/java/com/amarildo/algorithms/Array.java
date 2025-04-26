@@ -16,10 +16,6 @@ public class Array {
         return 0;
     }
 
-    public static int minSubArrayLen(int[] nums, int target) {
-        return 0;
-    }
-
     public static int[] buildPrefixSum(int[] arr) {
         return null;
     }

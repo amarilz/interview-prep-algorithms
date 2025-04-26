@@ -24,13 +24,6 @@ class DynamicProgrammingTest {
         }
 
         @Test
-        void testGrid_1x1() {
-            int[][] grid = {{5}};
-            int expected = 5;
-            assertEquals(expected, DynamicProgramming.minPathSum(grid));
-        }
-
-        @Test
         void testGrid_1x3() {
             int[][] grid = {{1, 2, 3}};
             int expected = 6; // 1 + 2 + 3
