@@ -19,7 +19,7 @@ import static com.amarildo.algorithms.Graph.convertToAdjacencyMap;
 import static com.amarildo.algorithms.Graph.dfsIterative;
 import static com.amarildo.algorithms.Graph.dijkstra;
 import static com.amarildo.algorithms.Graph.topologicalSortDfs;
-import static com.amarildo.algorithms.Graph.topologicalSortKahn;
+import static com.amarildo.algorithms.Graph.topologicalSortBfsKahn;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -330,7 +330,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> result = topologicalSortKahn(adj, V);
+                List<Integer> result = topologicalSortBfsKahn(adj, V);
 
                 // then
                 assertEquals(V, result.size());
@@ -349,7 +349,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> result = topologicalSortKahn(adj, V);
+                List<Integer> result = topologicalSortBfsKahn(adj, V);
 
                 // then
                 assertEquals(V, result.size());
@@ -369,7 +369,7 @@ class GraphTest {
                 List<List<Integer>> adj = buildAdjacencyList(V, edges);
 
                 // when
-                List<Integer> result = topologicalSortKahn(adj, V);
+                List<Integer> result = topologicalSortBfsKahn(adj, V);
 
                 // then
                 assertEquals(V, result.size());
@@ -390,7 +390,7 @@ class GraphTest {
 
                 // when
                 // then
-                assertThrows(IllegalStateException.class, () -> topologicalSortKahn(adj, V));
+                assertThrows(IllegalStateException.class, () -> topologicalSortBfsKahn(adj, V));
             }
         }
     }

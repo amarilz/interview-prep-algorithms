@@ -37,7 +37,7 @@ public class Graph {
     }
 
     @NotNull
-    public static List<Integer> topologicalSortKahn(List<List<Integer>> adj, int V) {
+    public static List<Integer> topologicalSortBfsKahn(List<List<Integer>> adj, int V) {
         return null;
     }
 
