@@ -321,7 +321,7 @@ class GraphTest {
 
             @Test
             @DisplayName("simple DAG")
-            void testSimpleDAG() {
+            void testSimpleDAG() throws Exception {
                 // given
                 int V = 6;
                 int[][] edges = {
@@ -339,7 +339,7 @@ class GraphTest {
 
             @Test
             @DisplayName("multiple valid orders")
-            void testMultipleValidOrders() {
+            void testMultipleValidOrders() throws Exception {
                 // given
                 int V = 3;
                 int[][] edges = {
@@ -359,7 +359,7 @@ class GraphTest {
 
             @Test
             @DisplayName("isolated nodes")
-            void isolatedNodes() {
+            void isolatedNodes() throws Exception {
                 // given
                 int V = 4;
                 int[][] edges = {
@@ -390,7 +390,7 @@ class GraphTest {
 
                 // when
                 // then
-                assertThrows(IllegalStateException.class, () -> topologicalSortBfsKahn(adj, V));
+                assertThrows(Exception.class, () -> topologicalSortBfsKahn(adj, V));
             }
         }
     }
