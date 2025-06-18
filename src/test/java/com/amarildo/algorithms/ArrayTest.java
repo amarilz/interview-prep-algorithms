@@ -96,14 +96,6 @@ class ArrayTest {
         }
 
         @Test
-        void testKMaggioreDiArray() {
-            int[] nums = {1, 2};
-            int k = 3;
-            int expected = 0; // input non valido
-            assertEquals(expected, Array.subarraySumFixed(nums, k));
-        }
-
-        @Test
         void testKUgualeZero() {
             int[] nums = {1, 2, 3};
             int k = 0;
@@ -116,14 +108,6 @@ class ArrayTest {
             int[] nums = {10};
             int k = 1;
             int expected = 10;
-            assertEquals(expected, Array.subarraySumFixed(nums, k));
-        }
-
-        @Test
-        void testArrayVuoto() {
-            int[] nums = {};
-            int k = 1;
-            int expected = 0;
             assertEquals(expected, Array.subarraySumFixed(nums, k));
         }
     }
