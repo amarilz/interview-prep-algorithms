@@ -18,10 +18,11 @@ import static com.amarildo.algorithms.Graph.convertMatrixToAdjacencyMap;
 import static com.amarildo.algorithms.Graph.convertToAdjacencyMap;
 import static com.amarildo.algorithms.Graph.dfsIterative;
 import static com.amarildo.algorithms.Graph.dijkstra;
-import static com.amarildo.algorithms.Graph.topologicalSortDfs;
 import static com.amarildo.algorithms.Graph.topologicalSortBfsKahn;
+import static com.amarildo.algorithms.Graph.topologicalSortDfs;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -448,6 +449,95 @@ class GraphTest {
 
             int[] result = dijkstra(graph, 0, 3);
             assertArrayEquals(new int[]{0, 1, 3}, result);
+        }
+    }
+
+    @Nested
+    @DisplayName("bipartite")
+    class Bipartite {
+
+        @Test
+        @DisplayName("Catena semplice (1-2-3-4) ⇒ bipartito")
+        void catenaSemplice() {
+            int n = 4;
+            int[][] edges = {
+                    {1, 2}, {2, 3}, {3, 4}
+            };
+            assertTrue(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Ciclo pari (1-2-3-4-1) ⇒ bipartito")
+        void cicloPari() {
+            int n = 4;
+            int[][] edges = {
+                    {1, 2}, {2, 3}, {3, 4}, {4, 1}
+            };
+            assertTrue(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Ciclo dispari (triangolo 1-2-3-1) ⇒ NON bipartito")
+        void cicloDispariTriangolo() {
+            int n = 3;
+            int[][] edges = {
+                    {1, 2}, {2, 3}, {3, 1}
+            };
+            assertFalse(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Autoanello (2-2) ⇒ NON bipartito")
+        void autoAnello() {
+            int n = 3;
+            int[][] edges = {
+                    {2, 2}
+            };
+            assertFalse(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Grafo disconnesso: componente con ciclo dispari ⇒ NON bipartito")
+        void grafoDisconnessoConComponenteNonBipartita() {
+            int n = 6;
+            int[][] edges = {
+                    // componente 1: triangolo (non bipartito)
+                    {1, 2}, {2, 3}, {3, 1},
+                    // componente 2: singolo arco 4-5 (bipartito) e 6 isolato
+                    {4, 5}
+            };
+            assertFalse(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Archi duplicati e multiarco ⇒ ancora bipartito")
+        void archiDuplicatiEMultipli() {
+            int n = 3;
+            int[][] edges = {
+                    {1, 2}, {2, 1}, // duplicato inverso
+                    {2, 3}, {2, 3}  // duplicato identico
+            };
+            assertTrue(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Vertici isolati non influiscono ⇒ bipartito")
+        void verticiIsolati() {
+            int n = 5;
+            int[][] edges = {
+                    {2, 3} // 1, 4, 5 isolati
+            };
+            assertTrue(Graph.isBipartiteGraph(n, edges));
+        }
+
+        @Test
+        @DisplayName("Ciclo pari con vertici isolati ⇒ bipartito")
+        void cicloPariConIsolati() {
+            int n = 6;
+            int[][] edges = {
+                    {1, 2}, {2, 3}, {3, 4}, {4, 1} // 5 e 6 isolati
+            };
+            assertTrue(Graph.isBipartiteGraph(n, edges));
         }
     }
 }

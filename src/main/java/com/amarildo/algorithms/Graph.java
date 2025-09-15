@@ -54,4 +54,8 @@ public class Graph {
     public static int[] dijkstra(Map<Integer, List<Edge>> graph, int source, int n) {
         return null;
     }
+
+    public static boolean isBipartiteGraph(int numVertici, int[][] archiOstilita) {
+        return false;
+    }
 }
